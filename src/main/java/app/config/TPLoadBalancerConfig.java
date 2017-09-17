@@ -1,6 +1,6 @@
 package app.config;
 
-import exceptions.WrongArgumentsExceptionHandler;
+import dispatching.RequestsDispatcher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import controller.LoadBalancerController;
@@ -9,12 +9,17 @@ import controller.LoadBalancerController;
 public class TPLoadBalancerConfig {
 
     @Bean
-    public LoadBalancerController loadBalancerView(){
-        return new LoadBalancerController();
+    public RequestsDispatcher requestsDispatcher(GroupsPropertiesInterceptor groupsProperties){
+        return new RequestsDispatcher(groupsProperties);
     }
 
-//    @Bean
-//    public WrongArgumentsExceptionHandler wrongArgumentsExceptionHandler(){
-//        return new WrongArgumentsExceptionHandler();
-//    }
+    @Bean
+    public LoadBalancerController loadBalancerView(final RequestsDispatcher requestsDispatcher){
+        return new LoadBalancerController(requestsDispatcher);
+    }
+
+    @Bean
+    public GroupsPropertiesInterceptor groupsProperties(){
+        return new GroupsPropertiesInterceptor();
+    }
 }

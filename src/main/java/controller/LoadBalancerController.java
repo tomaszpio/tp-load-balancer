@@ -1,17 +1,25 @@
 package controller;
 
-import org.springframework.web.bind.MethodArgumentNotValidException;
+import dispatching.RequestsDispatcher;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
 @RestController
 public class LoadBalancerController {
 
-    @RequestMapping("/route")
-    public String route(@RequestParam(value="id")String param){
-        return param;
+    private final RequestsDispatcher requestsDispatcher;
+
+    public LoadBalancerController(RequestsDispatcher requestsDispatcher) {
+
+        this.requestsDispatcher = requestsDispatcher;
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @RequestMapping("/route")
+    public String route(@RequestParam(value="id")String id){
+        return this.requestsDispatcher.dispatch(id);
+    }
+
+    @ExceptionHandler(MissingServletRequestPartException.class)
     public String wrongArgumentsHandle(){
         return "Wrong Arguments passed";
     }
