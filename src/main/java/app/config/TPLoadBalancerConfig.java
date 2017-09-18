@@ -1,6 +1,7 @@
 package app.config;
 
 import dispatching.RequestsDispatcher;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import controller.LoadBalancerController;
@@ -18,8 +19,4 @@ public class TPLoadBalancerConfig {
         return new LoadBalancerController(requestsDispatcher);
     }
 
-    @Bean
-    public GroupsPropertiesInterceptor groupsProperties(){
-        return new GroupsPropertiesInterceptor();
-    }
 }

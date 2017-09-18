@@ -24,14 +24,14 @@ public class RequestsDispatcherTest {
     private GroupsPropertiesInterceptor groupsProperties;
 
     private RequestsDispatcher requestsDispatcher;
-    private Map<String, Integer> groupWeights = new HashMap<>();
+    private Map<String, String> groupWeights = new HashMap<>();
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        groupWeights.put("GroupA", 2);
-        groupWeights.put("GroupB", 3);
-        groupWeights.put("GroupC", 5);
+        groupWeights.put("GroupA", "2");
+        groupWeights.put("GroupB", "3");
+        groupWeights.put("GroupC", "5");
         when(groupsProperties.getGroupsWeights()).thenReturn(groupWeights);
         requestsDispatcher = new RequestsDispatcher(groupsProperties);
     }
@@ -101,7 +101,7 @@ public class RequestsDispatcherTest {
 
     private Double getExpectedPercentageDistribution(Map.Entry<String, AtomicInteger> entry) {
         final String group = entry.getKey();
-        return (double) (groupsProperties.getGroupsWeights().get(group) * 10);
+        return (double) (Integer.valueOf(groupsProperties.getGroupsWeights().get(group)) * 10);
     }
 
     private double getActualPercentageDistribution(Map.Entry<String, AtomicInteger> entry, Double amountOfRequests) {

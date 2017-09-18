@@ -16,11 +16,11 @@ public class RequestsDispatcher {
 
     public RequestsDispatcher(GroupsPropertiesInterceptor groupsProperties) {
         this.groupsProperties = groupsProperties;
-        Iterator<Map.Entry<String, Integer>> groupsProps = this.groupsProperties.getGroupsWeights().entrySet().iterator();
+        Iterator<Map.Entry<String, String>> groupsProps = this.groupsProperties.getGroupsWeights().entrySet().iterator();
         int lastWeight = 0;
         while(groupsProps.hasNext()){
-            final Map.Entry<String, Integer> groupsProp = groupsProps.next();
-            int weightedBucket = lastWeight + groupsProp.getValue();
+            final Map.Entry<String, String> groupsProp = groupsProps.next();
+            int weightedBucket = lastWeight + Integer.valueOf(groupsProp.getValue());
             groupWeights.put(weightedBucket, groupsProp.getKey());
             lastWeight = weightedBucket;
         }

@@ -1,17 +1,19 @@
 package app.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
-@ConfigurationProperties
+@ConfigurationProperties(prefix="com")
 public class GroupsPropertiesInterceptor {
 
-    private Map<String, Integer> groupsWeights= new HashMap<>();
+    @Value("#{${groupsWeights}}")
+    private Map<String, String> groupsWeights = new HashMap<>();
 
-    public Map<String, Integer> getGroupsWeights() {
+    public Map<String, String> getGroupsWeights() {
         return groupsWeights;
     }
 }
