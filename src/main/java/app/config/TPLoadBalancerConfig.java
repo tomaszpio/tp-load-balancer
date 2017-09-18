@@ -1,7 +1,9 @@
 package app.config;
 
+import dispatching.BucketCalculator;
+import dispatching.GroupWeightsLoader;
 import dispatching.RequestsDispatcher;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import controller.LoadBalancerController;
@@ -10,8 +12,17 @@ import controller.LoadBalancerController;
 public class TPLoadBalancerConfig {
 
     @Bean
-    public RequestsDispatcher requestsDispatcher(GroupsPropertiesInterceptor groupsProperties){
-        return new RequestsDispatcher(groupsProperties);
+    public GroupWeightsLoader groupWeightsCalculator(final GroupsPropertiesInterceptor groupsProperties) {
+        return new GroupWeightsLoader(groupsProperties);
+    }
+
+    @Bean
+    public BucketCalculator bucketCalculator(@Value("${numberOfBuckets}") final Integer numberOfBuckets){
+        return new BucketCalculator(numberOfBuckets);
+    }
+    @Bean
+    public RequestsDispatcher requestsDispatcher(GroupWeightsLoader groupWeightsLoader, BucketCalculator bucketCalculator){
+        return new RequestsDispatcher(groupWeightsLoader.load(), bucketCalculator);
     }
 
     @Bean

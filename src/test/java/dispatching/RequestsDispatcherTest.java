@@ -20,20 +20,16 @@ public class RequestsDispatcherTest {
     private static final double SMALL_AMOUNT_REQUESTS = 1000.0;
     private static final double BIG_AMOUNT_REQUESTS = 1000_000.0;
 
-    @Mock
-    private GroupsPropertiesInterceptor groupsProperties;
-
     private RequestsDispatcher requestsDispatcher;
-    private Map<String, String> groupWeights = new HashMap<>();
+    private Map<Integer, String> groupWeights = new HashMap<>();
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        groupWeights.put("GroupA", "2");
-        groupWeights.put("GroupB", "3");
-        groupWeights.put("GroupC", "5");
-        when(groupsProperties.getGroupsWeights()).thenReturn(groupWeights);
-        requestsDispatcher = new RequestsDispatcher(groupsProperties);
+        groupWeights.put(2, "GroupA");
+        groupWeights.put(3, "GroupB");
+        groupWeights.put(5, "GroupC");
+        requestsDispatcher = new RequestsDispatcher(groupWeights, new BucketCalculator(10));
     }
 
     @Test
@@ -101,7 +97,7 @@ public class RequestsDispatcherTest {
 
     private Double getExpectedPercentageDistribution(Map.Entry<String, AtomicInteger> entry) {
         final String group = entry.getKey();
-        return (double) (Integer.valueOf(groupsProperties.getGroupsWeights().get(group)) * 10);
+        return (double) (Integer.valueOf(groupWeights.get(group)) * 10);
     }
 
     private double getActualPercentageDistribution(Map.Entry<String, AtomicInteger> entry, Double amountOfRequests) {
