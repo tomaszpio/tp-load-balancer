@@ -1,4 +1,6 @@
-package dispatching;
+package com.tp.loadbalancer.dispatching;
+
+import com.tp.loadbalancer.exceptions.GroupNotFoundException;
 
 import java.util.Map;
 import java.util.Optional;
@@ -14,14 +16,14 @@ public class RequestsDispatcher {
         this.bucketCalculator = bucketCalculator;
     }
 
-    public String dispatch(String id) {
+    public String dispatch(final String id) {
         final int bucket = bucketCalculator.calculate(id);
         Optional<Map.Entry<Integer, String>> group = groupWeights.entrySet().stream()
-                .filter(findGroupBucketBelongTo(bucket))
+                .filter(entry -> entry.getKey() > bucket)
                 .findFirst();
 
         if(!group.isPresent()) {
-            throw new RuntimeException("Can't find group for id "+id);
+            throw new GroupNotFoundException("Can't find group for id "+id);
         }
         return  group.get().getValue();
     }

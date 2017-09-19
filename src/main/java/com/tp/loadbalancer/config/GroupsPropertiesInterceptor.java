@@ -1,4 +1,4 @@
-package app.config;
+package com.tp.loadbalancer.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

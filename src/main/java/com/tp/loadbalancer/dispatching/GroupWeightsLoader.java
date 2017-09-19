@@ -1,6 +1,6 @@
-package dispatching;
+package com.tp.loadbalancer.dispatching;
 
-import app.config.GroupsPropertiesInterceptor;
+import com.tp.loadbalancer.config.GroupsPropertiesInterceptor;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,7 +10,7 @@ public class GroupWeightsLoader {
     private Iterator<Map.Entry<String, String>> groupsProps;
     private final  Map<Integer, String> groupWeights = new HashMap<>();
 
-    public GroupWeightsLoader(GroupsPropertiesInterceptor groupsProperties) {
+    public GroupWeightsLoader(final GroupsPropertiesInterceptor groupsProperties) {
         this.groupsProps = groupsProperties.getGroupsWeights().entrySet().iterator();
     }
 
