@@ -68,10 +68,15 @@ Running 1m test @ http://localhost:8080/</br>
     
 # Performance tests results
 
-https://github.com/tomaszpio/tp-load-balancer/wiki/Performance-Tests<br>
+Five test runs was performed on:<br>
+CPU: Intel Core i5 72000<br>
+     2 Cores 2,5GHz<br>
+RAM: 8GB<br>
 
-Analyzing memory and cpu usage of tp-load-balancer with Java Mission Control it can be noticied that a lot of resources was<br>
-spent for anotations processing what leads to conclusion that probably spring REST was not the best choice and some lighter version of REST framewrok could be used. For example https://ratpack.io/. 
+results:  https://docs.google.com/spreadsheets/d/1XC8VOSM4L2ZlT0494aP55feKyJ5BPECpg0vcNsmh1d4/edit?usp=sharing <br>
+
+- Average throughput was: 11909 Req/sec 
+- Average latency was 521.244 micro seconds
 
   
 
