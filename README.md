@@ -38,6 +38,7 @@ While service is running it can be reached with wget
 # Testing
 Project contains functional test which verifies requests distribution among predefined, weighted groups <br>
 FunctionalTestRunner - periodicaly reports requests distribution among groups. <br>
+When running test it should also have --spring.config.location=file:{externally.delivered.properties} passed as a program parameter.
 Example of report:<br>
 <b>
 functional.config.FakeClient : 20.346608898516912 percentage of traffic goes to group GroupA <br>
