@@ -63,6 +63,10 @@ Running 1m test @ http://localhost:8080/</br>
     |--------------|-------|-----------|-------|----------|
     |Latency       |0.99ms |   1.27ms  |76.01ms|   94.86% |
     | Req/Sec      |3.27k  | 607.07    | 6.29k |   83.91% |
+    
+# Performance tests results
+
+
 
 
 
