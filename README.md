@@ -66,6 +66,7 @@ Running 1m test @ http://localhost:8080/</br>
     
 # Performance tests results
 
+https://github.com/tomaszpio/tp-load-balancer/wiki/Performance-Tests
 
 
 
