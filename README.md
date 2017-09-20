@@ -22,11 +22,13 @@ Example of properties file content:<br>
 numberOfBuckets=10</b>
 
 # Dockerization
-Project has Dockerfile delivered. In order to create docker image run
+Project has Dockerfile delivered. following command creates docker image:
 * docker build -t <tag> . <br>
-Then run docker image with command
+
+Then run docker image with command:
 - docker run -d -p 8080:8080 <tag> <br>
-When run on Windows service should be called using address retrieved using
+
+When running on Windows service should be reached using address retrieved by command:
 -  docker-machine ip default
 
 # Usage
@@ -34,7 +36,7 @@ While service is running it can be reached with wget
 - wget http://${ip}:8080/route?id={alphanumeric_id}
 
 # Testing
-Project contains functional test which verify requests distribution among predeined, weighted groups <br>
+Project contains functional test which verify requests distribution among predefined, weighted groups <br>
 FunctionalTestRunner - periodicaly reports requests distribution among groups. <br>
 Example of report:<br>
 <b>
@@ -66,10 +68,10 @@ Running 1m test @ http://localhost:8080/</br>
     
 # Performance tests results
 
-https://github.com/tomaszpio/tp-load-balancer/wiki/Performance-Tests
+https://github.com/tomaszpio/tp-load-balancer/wiki/Performance-Tests<br>
 
-
-
+Analyzing memory and cpu usage of tp-load-balancer with Java Mission Control it can be noticied that a lot of resources was<br>
+spent for anotations processing what leads to conclusion that probably spring REST was not the best choice and some lighter version of REST framewrok could be used. For example https://ratpack.io/. 
 
   
 
