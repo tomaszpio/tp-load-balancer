@@ -23,10 +23,10 @@ numberOfBuckets=10</b>
 
 # Dockerization
 Project has Dockerfile delivered. following command creates docker image:
-* docker build -t <tag> . <br>
+* docker build -t docker_image_tag . <br>
 
 Then run docker image with command:
-- docker run -d -p 8080:8080 <tag> <br>
+- docker run -d -p 8080:8080 docker_image_tag <br>
 
 When running on Windows service should be reached using address retrieved by command:
 -  docker-machine ip default
@@ -36,7 +36,7 @@ While service is running it can be reached with wget
 - wget http://${ip}:8080/route?id={alphanumeric_id}
 
 # Testing
-Project contains functional test which verify requests distribution among predefined, weighted groups <br>
+Project contains functional test which verifies requests distribution among predefined, weighted groups <br>
 FunctionalTestRunner - periodicaly reports requests distribution among groups. <br>
 Example of report:<br>
 <b>
@@ -52,19 +52,6 @@ In order to achieve different user id for each requests <b>loadtest.lua</b> scri
 
 Example of usage:
 - wrk -t 2 -c 2 -d test_duration -s /path/to/loadtest.lua http://${ip}:8080</br>
-
-Example of report:</br>
- wrk -c 20 -t 4 -d 60s -s loadtest.lua http://localhost:8080/ </br>
-Running 1m test @ http://localhost:8080/</br>
-  4 threads and 20 connections</br>
-    941050 requests in 1.00m, 108.59MB read</br>
-    Requests/sec:  15661.36</br>
-    Transfer/sec:      1.81MB
-    
-    | Thread Stats | Avg   |   Stdev   |  Max  | +/- Stdev|
-    |--------------|-------|-----------|-------|----------|
-    |Latency       |0.99ms |   1.27ms  |76.01ms|   94.86% |
-    | Req/Sec      |3.27k  | 607.07    | 6.29k |   83.91% |
     
 # Performance tests results
 
