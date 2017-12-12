@@ -36,9 +36,9 @@ While service is running it can be reached with wget
 - wget http://${ip}:8080/route?id={alphanumeric_id}
 
 # Testing
-Project contains functional test which verifies requests distribution among predefined, weighted groups <br>
+Project contains functional main.test which verifies requests distribution among predefined, weighted groups <br>
 FunctionalTestRunner - periodicaly reports requests distribution among groups. <br>
-When running test it should also have --spring.config.location=file:{externally.delivered.properties} passed as a program parameter.
+When running main.test it should also have --spring.config.location=file:{externally.delivered.properties} passed as a program parameter.
 Example of report:<br>
 <b>
 functional.config.FakeClient : 20.346608898516912 percentage of traffic goes to group GroupA <br>
@@ -56,7 +56,7 @@ Example of usage:
     
 # Performance tests results
 
-Five test runs was performed on:<br>
+Five main.test runs was performed on:<br>
 CPU: Intel Core i5 72000<br>
      2 Cores 2,5GHz<br>
 RAM: 8GB<br>

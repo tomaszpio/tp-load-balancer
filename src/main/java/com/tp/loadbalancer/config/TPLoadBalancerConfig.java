@@ -1,5 +1,7 @@
 package com.tp.loadbalancer.config;
 
+import com.tp.loadbalancer.controller.LoadBalancerRatpackController;
+import com.tp.loadbalancer.controller.LoadBalancerVertxController;
 import com.tp.loadbalancer.dispatching.BucketCalculator;
 import com.tp.loadbalancer.dispatching.GroupWeightsLoader;
 import com.tp.loadbalancer.dispatching.RequestsDispatcher;
@@ -23,6 +25,15 @@ public class TPLoadBalancerConfig {
     @Bean
     public RequestsDispatcher requestsDispatcher(GroupWeightsLoader groupWeightsLoader, BucketCalculator bucketCalculator){
         return new RequestsDispatcher(groupWeightsLoader.load(), bucketCalculator);
+    }
+
+    public LoadBalancerRatpackController loadBalancerRatpackController(final RequestsDispatcher requestsDispatcher){
+        return new LoadBalancerRatpackController(requestsDispatcher);
+    }
+
+    @Bean(initMethod = "init")
+    public LoadBalancerVertxController loadBalancerVertxController(final RequestsDispatcher requestsDispatcher){
+        return new LoadBalancerVertxController(requestsDispatcher);
     }
 
 }
